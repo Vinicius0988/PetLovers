@@ -5,10 +5,14 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.catalogo.Pet.Pet;
 import com.example.catalogo.Pet.PetRepository;
+import com.example.catalogo.Pet.PetRequestDTO;
 import com.example.catalogo.Pet.PetResponseDTO;
 
 @RestController
@@ -17,6 +21,12 @@ public class PetController { //requisiçoes HTTPs
 
     @Autowired
     private PetRepository repository;
+
+    @PostMapping
+    public void savePet(@RequestBody PetRequestDTO data) {
+        Pet petData = new Pet(data);
+        repository.save(petData);
+    }
 
     @GetMapping
     public List<PetResponseDTO> getAll() {

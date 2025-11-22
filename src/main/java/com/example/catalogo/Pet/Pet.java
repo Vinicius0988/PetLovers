@@ -11,12 +11,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-@Table(name = "pets")
-@Entity(name = "pets")
+@Table(name = "pets") //cria a tabela pets
+@Entity(name = "pets") //cria a entidade pets
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@NoArgsConstructor //declara um constructor q nao recebe argumentos
+@AllArgsConstructor // declara um constructor q recebe todos os argumentos
+@EqualsAndHashCode(of = "id") //indica o id como representação unica
+
 public class Pet { //indica um tabela
     
     @Id @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -27,4 +28,13 @@ public class Pet { //indica um tabela
     private String sexo;
     private String especie;
     private String image;
+
+    public Pet(PetRequestDTO data) {
+         this.title = data.title();
+    this.peso = data.peso();
+    this.sexo = data.sexo();
+    this.especie = data.especie();
+    this.idade = data.idade();
+    this.image = data.image();
+    }
 }
