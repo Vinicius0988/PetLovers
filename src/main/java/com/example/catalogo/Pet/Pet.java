@@ -31,10 +31,10 @@ public class Pet { //indica um tabela
 
     public Pet(PetRequestDTO data) {
          this.title = data.title();
-    this.peso = data.peso();
-    this.sexo = data.sexo();
-    this.especie = data.especie();
-    this.idade = data.idade();
-    this.image = data.image();
+        this.peso = data.peso();
+        this.sexo = data.sexo();
+        this.especie = data.especie();
+        this.idade = data.idade();
+        this.image = data.image();
     }
 }
