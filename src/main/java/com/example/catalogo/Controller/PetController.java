@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.catalogo.Pet.Pet;
+import com.example.catalogo.Pet.PetDomestico;
 import com.example.catalogo.Pet.PetRepository;
 import com.example.catalogo.Pet.PetRequestDTO;
 import com.example.catalogo.Pet.PetResponseDTO;
+import com.example.catalogo.Pet.PetSilvestre;
 
 @RestController
 @RequestMapping("pet")
@@ -28,8 +30,17 @@ public class PetController { //requisiçoes HTTPs
 
     @PostMapping
     public void savePet(@RequestBody PetRequestDTO data) {
-        Pet petData = new Pet(data);
-        repository.save(petData);
+        Pet petData;
+        if ("DOMESTICO".equalsIgnoreCase(data.tipoPet())) {
+        petData = new PetDomestico(data, data.raca());
+    } else if ("SILVESTRE".equalsIgnoreCase(data.tipoPet())) {
+        petData = new PetSilvestre(data, data.licenca());
+    } else {
+        throw new IllegalArgumentException("Tipo de pet inválido: " + data.tipoPet());
+    }
+
+    repository.save(petData);
+
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*") //permite de todas as fontes
